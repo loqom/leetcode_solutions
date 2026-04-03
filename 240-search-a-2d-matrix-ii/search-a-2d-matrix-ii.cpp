@@ -4,7 +4,7 @@ public:
         int n=matrix.size();
         int m=matrix[0].size();
         for(int i=0;i<n;i++){
-            if(matrix[i][0]>target) continue;     
+            // if(matrix[i][0]>target) continue;     
             int lo=0;
             int hi=m-1;
             while(lo<=hi){
