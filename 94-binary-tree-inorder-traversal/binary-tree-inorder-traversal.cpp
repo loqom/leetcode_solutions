@@ -1,14 +1,27 @@
 class Solution {
 public:
-    void traverse(TreeNode* root,vector<int> &res){
-        if(root==NULL) return;
-        traverse(root->left,res);
-        res.push_back(root->val);
-        traverse(root->right,res);
-    }
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int>res;
-        traverse(root,res);
-        return res;
+        //morris
+        vector<int> ans;
+        TreeNode* curr=root;
+        while(curr!=NULL){
+            if(curr->left!=NULL){
+                TreeNode* pred=curr->left;
+                while(pred->right!=NULL && pred->right!=curr) pred=pred->right;
+                if(pred->right==NULL){
+                    pred->right=curr;curr=curr->left;
+                } 
+                if(pred->right==curr){
+                    pred->right=NULL;
+                    ans.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
+            else{
+                ans.push_back(curr->val);
+                curr=curr->right;
+            }
+        }
+        return ans;
     }
 };
