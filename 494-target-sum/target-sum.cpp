@@ -1,15 +1,21 @@
 class Solution {
 public:
-    int helper(int i,int n,vector<int> &nums,int t){
+    int sm;
+    vector<vector<int>> dp;
+    int helper(int i,int n,int res,vector<int> &nums,int t){
         if(i==n){
-            if(t==0) return 1;
+            if(t==res) return 1;
             return 0;
         }
-        int add=helper(i+1,n,nums,t-nums[i]);
-        int sub=helper(i+1,n,nums,t+nums[i]);
-        return add+sub;
+        if(dp[i][res+sm]!=-1) return dp[i][res+sm];
+        int add=helper(i+1,n,res+nums[i],nums,t);
+        int sub=helper(i+1,n,res-nums[i],nums,t);
+        return dp[i][res+sm]=add+sub;
     }
     int findTargetSumWays(vector<int>& nums, int target) {
-        return helper(0,nums.size(),nums,target);
+        sm=0;
+        for(int i:nums) sm+=i;
+        dp.assign(nums.size(),vector<int>(2*sm+1,-1));
+        return helper(0,nums.size(),0,nums,target);
     }
-};
+}; 
