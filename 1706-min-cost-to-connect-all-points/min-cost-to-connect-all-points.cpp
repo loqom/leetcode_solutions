@@ -20,7 +20,7 @@ public:
             visited[a]=true;
             sm+=c;
             for(int i=0;i<n;i++){
-                if(a==i || b==i) continue;
+                if(a==i) continue;
                 if(visited[i]==true) continue;
                 int x1=points[i][0];
                 int y1=points[i][1];
