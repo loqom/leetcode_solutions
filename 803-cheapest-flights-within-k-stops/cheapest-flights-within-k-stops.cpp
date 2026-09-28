@@ -10,11 +10,7 @@ public:
         }
         vector<int> ans(n,INT_MAX);
         ans[src]=0;
-        priority_queue<
-            tuple<int, int, int>,
-            vector<tuple<int, int, int>>,
-            greater<tuple<int, int, int>>
-        > pq;
+        priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,int,int>>> pq;
         pq.push({0,0,src});
         while(pq.size()>0){
             tuple<int,int,int> tp=pq.top();
