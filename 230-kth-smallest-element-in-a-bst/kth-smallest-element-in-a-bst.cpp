@@ -1,19 +1,18 @@
 class Solution {
 public:
-    int n,m;
-    void helper(TreeNode* root){
-        if(root==NULL) return;
-        helper(root->left);
-        if(m>0){
-            n=root->val;
-            m--;
+    int j=0;
+    int mn;
+    void helper(TreeNode* root,int &k){
+        if(!root) return;
+        helper(root->left,k);
+        if(k>0) {
+            mn=root->val;
+            k--;
         }
-        helper(root->right);
-    }
+        helper(root->right,k);
+    }   
     int kthSmallest(TreeNode* root, int k) {
-        n=INT_MAX;
-        m=k;
-        helper(root);
-        return n;
+        helper(root,k);
+        return mn;
     }
 };
